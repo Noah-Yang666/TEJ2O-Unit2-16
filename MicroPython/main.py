@@ -69,6 +69,7 @@ radio.on()
 while True:
     if button_a.was_pressed():
         while True:
+            display.show(str(numberDistance) + "cm")
             if sonar.distance_mm() / 10 < 5:
                 display.show(Image.TRIANGLE)
                 radio.send("Too Close")
