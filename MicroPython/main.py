@@ -5,7 +5,6 @@ This module is a Micro:bit MicroPython program that uses radio to transmit and r
 """
 
 from microbit import *
-
 import radio
 
 
@@ -51,7 +50,7 @@ class HCSR04:
                 k = k + i
             except StopIteration:
                 i = -1
-        dist = -1 if i < 0 else round(((pre + (k - i) * 8.0 + post) * 8 * 0.344) / 2)
+        dist = -1 if i < 0 else round(((pre + (k - i) * 8.0 + post) * 8 * 0.172) / 2)
         return dist
 
 
@@ -60,22 +59,21 @@ sonar = HCSR04()
 numberDistance = 0
 
 # setting up
-display.clear()
 display.show(Image.HAPPY)
-radio.config(group=67)
+radio.config(group=5)
 radio.on()
 
-# start tracking with button A
+# start tracking with button a
 while True:
     if button_a.was_pressed():
         while True:
-            display.show(str(numberDistance) + "cm")
             if sonar.distance_mm() / 10 < 5:
                 display.show(Image.TRIANGLE)
                 radio.send("Too Close")
             else:
                 display.show(Image.TRIANGLE)
-                radio.send("It's Good")
+                radio.send("We Good")
+            display.show(Image.HAPPY)
     message = radio.receive()
     if message:
         display.clear()
