@@ -78,4 +78,5 @@ while True:
     if message:
         display.clear()
         display.scroll(message)
+        display.clear()
         display.show(Image.HAPPY)
